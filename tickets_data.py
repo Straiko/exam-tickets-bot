@@ -87,7 +87,7 @@ TICKETS = [
             "📦 <b>Аналогия:</b> Коробка (переменная) с надписью «фрукты» (тип) "
             "и яблоком внутри (значение)."
         ),
-        "code": '<pre language="javascript">let age = 25;       // Переменная age, тип number, значение 25\nlet name = "Толик"; // Переменная name, тип string, значение "Толик"\nlet isReady = true; // Переменная isReady, тип boolean, значение true</pre>',
+        "code": '<pre><code class="language-javascript">let age = 25;       // Переменная age, тип number, значение 25\nlet name = "Толик"; // Переменная name, тип string, значение "Толик"\nlet isReady = true; // Переменная isReady, тип boolean, значение true</code></pre>',
         "quiz": {
             "question": "Что определяет ТИП переменной?",
             "options": [
@@ -115,12 +115,12 @@ TICKETS = [
             "⚖️ <b>Плюсы динамики:</b> гибкость, быстрая разработка"
         ),
         "code": (
-            '<pre language="javascript">// Динамическая (JavaScript)\n'
+            '<pre><code class="language-javascript">// Динамическая (JavaScript)\n'
             'let x = 42;      // number\n'
             'x = "строка";    // теперь string — ОК!\n\n'
             '// Статическая (TypeScript)\n'
             '// let x: number = 42;\n'
-            '// x = "строка";  // ОШИБКА компиляции!</pre>'
+            '// x = "строка";  // ОШИБКА компиляции!</code></pre>'
         ),
         "quiz": {
             "question": "В каком языке тип переменной может измениться во время работы программы?",
@@ -144,14 +144,14 @@ TICKETS = [
             "📌 <b>Совет:</b> Всегда используй явное преобразование, чтобы избежать багов."
         ),
         "code": (
-            '<pre language="javascript">// Явное\n'
+            '<pre><code class="language-javascript">// Явное\n'
             'Number("42");    // 42\n'
             'String(42);      // "42"\n'
             'parseInt("10px"); // 10\n\n'
             '// Неявное (коварное!)\n'
             '"5" + 3;   // "53" (строка!)\n'
             '"5" - 3;   // 2 (число!)\n'
-            'true + 1;  // 2</pre>'
+            'true + 1;  // 2</code></pre>'
         ),
         "quiz": {
             "question": 'Что вернёт выражение "5" + 3 в JavaScript?',
@@ -177,14 +177,14 @@ TICKETS = [
             "<code>let/const</code> — блочную."
         ),
         "code": (
-            '<pre language="javascript">let global = "Я глобальная";\n\n'
+            '<pre><code class="language-javascript">let global = "Я глобальная";\n\n'
             "function test() {\n"
             '  let local = "Я локальная";\n'
             "  console.log(global); // ✅ Видит\n"
             "  console.log(local);  // ✅ Видит\n"
             "}\n\n"
             "console.log(global); // ✅ Видит\n"
-            "// console.log(local); // ❌ Ошибка!</pre>"
+            "// console.log(local); // ❌ Ошибка!</code></pre>"
         ),
         "quiz": {
             "question": "Какую область видимости имеет переменная, объявленная через let внутри блока {}?",
@@ -210,11 +210,11 @@ TICKETS = [
             "Локальная — временный работник на один проект."
         ),
         "code": (
-            '<pre language="javascript">function example() {\n'
+            '<pre><code class="language-javascript">function example() {\n'
             "  let temp = 42; // Родилась\n"
             "  console.log(temp);\n"
             "} // temp умерла (память освобождена)\n\n"
-            '// temp здесь уже не существует</pre>'
+            '// temp здесь уже не существует</code></pre>'
         ),
         "quiz": {
             "question": "Что происходит с локальной переменной после завершения функции?",
@@ -244,14 +244,14 @@ TICKETS = [
             "Без них программа была бы линейной."
         ),
         "code": (
-            '<pre language="javascript">let age = 18;\n\n'
-            "if (age >= 18) {\n"
+            '<pre><code class="language-javascript">let age = 18;\n\n'
+            "if (age &gt;= 18) {\n"
             '  console.log("Можно голосовать! ✅");\n'
-            "} else if (age >= 14) {\n"
+            "} else if (age &gt;= 14) {\n"
             '  console.log("Скоро сможешь 🔜");\n'
             "} else {\n"
             '  console.log("Ещё рано ❌");\n'
-            "}</pre>"
+            "}</code></pre>"
         ),
         "quiz": {
             "question": "Какой блок выполнится, если ни одно условие в if/else if не истинно?",
@@ -276,9 +276,9 @@ TICKETS = [
             "• <code>do...while</code> — «Съешь ложку → проверь, хочешь ещё?»"
         ),
         "code": (
-            '<pre language="javascript">// while — предусловие\n'
+            '<pre><code class="language-javascript">// while — предусловие\n'
             "let i = 0;\n"
-            "while (i < 3) {\n"
+            "while (i &lt; 3) {\n"
             '  console.log("while:", i);\n'
             "  i++;\n"
             "}\n\n"
@@ -286,7 +286,7 @@ TICKETS = [
             "let j = 5;\n"
             "do {\n"
             '  console.log("do...while:", j); // Выполнится 1 раз!\n'
-            "} while (j < 3);</pre>"
+            "} while (j &lt; 3);</code></pre>"
         ),
         "quiz": {
             "question": "Сколько минимум раз выполнится тело цикла do...while?",
@@ -312,16 +312,16 @@ TICKETS = [
             "🔄 <b>Аналогия:</b> День сурка — один и тот же день повторяется бесконечно."
         ),
         "code": (
-            '<pre language="javascript">// ❌ Бесконечный цикл (ПЛОХО!)\n'
+            '<pre><code class="language-javascript">// ❌ Бесконечный цикл (ПЛОХО!)\n'
             "// while (true) {\n"
             '//   console.log("Бесконечность...");\n'
             "// }\n\n"
             "// ✅ С условием выхода\n"
             "let count = 0;\n"
             "while (true) {\n"
-            "  if (count >= 5) break; // Выход!\n"
+            "  if (count &gt;= 5) break; // Выход!\n"
             "  count++;\n"
-            "}</pre>"
+            "}</code></pre>"
         ),
         "quiz": {
             "question": "Какой оператор позволяет принудительно выйти из цикла?",
@@ -347,7 +347,7 @@ TICKETS = [
             "Каждый кусочек — отдельная функция."
         ),
         "code": (
-            '<pre language="javascript">// Без декомпозиции — каша\n'
+            '<pre><code class="language-javascript">// Без декомпозиции — каша\n'
             "// С декомпозицией — порядок!\n\n"
             "function validateEmail(email) {\n"
             '  return email.includes("@");\n'
@@ -356,7 +356,7 @@ TICKETS = [
             "  if (validateEmail(email)) {\n"
             '    console.log("Отправлено:", text);\n'
             "  }\n"
-            "}</pre>"
+            "}</code></pre>"
         ),
         "quiz": {
             "question": "Как называется принцип разбиения сложной задачи на простые подзадачи?",
@@ -381,12 +381,12 @@ TICKETS = [
             "<b>А</b>ргумент = <b>А</b>ктуальный."
         ),
         "code": (
-            '<pre language="javascript">//        параметры ↓↓\n'
+            '<pre><code class="language-javascript">//        параметры ↓↓\n'
             "function greet(name, age) {\n"
             "  console.log(`Привет, ${name}! Тебе ${age}`);\n"
             "}\n\n"
             '//    аргументы ↓↓\n'
-            'greet("Толик", 18);</pre>'
+            'greet("Толик", 18);</code></pre>'
         ),
         "quiz": {
             "question": "Как называется конкретное значение, переданное при вызове функции?",
@@ -410,11 +410,11 @@ TICKETS = [
             "⚠️ Код после <code>return</code> <b>не выполнится!</b>"
         ),
         "code": (
-            '<pre language="javascript">function multiply(a, b) {\n'
+            '<pre><code class="language-javascript">function multiply(a, b) {\n'
             "  return a * b; // Возвращает результат\n"
             '  console.log("Не выполнится!"); // ❌ Мёртвый код\n'
             "}\n\n"
-            "let result = multiply(3, 4); // result = 12</pre>"
+            "let result = multiply(3, 4); // result = 12</code></pre>"
         ),
         "quiz": {
             "question": "Что вернёт функция, если в ней нет оператора return?",
@@ -438,12 +438,12 @@ TICKETS = [
             "бесконечная рекурсия → Stack Overflow!"
         ),
         "code": (
-            '<pre language="javascript">function factorial(n) {\n'
-            "  if (n <= 1) return 1;    // Базовый случай (дно)\n"
+            '<pre><code class="language-javascript">function factorial(n) {\n'
+            "  if (n &lt;= 1) return 1;    // Базовый случай (дно)\n"
             "  return n * factorial(n - 1); // Рекурсия\n"
             "}\n\n"
             "// factorial(4) = 4 * 3 * 2 * 1 = 24\n"
-            "console.log(factorial(4)); // 24</pre>"
+            "console.log(factorial(4)); // 24</code></pre>"
         ),
         "quiz": {
             "question": "Что является обязательным элементом рекурсии для её остановки?",
@@ -469,15 +469,15 @@ TICKETS = [
             "к базовому случаю. Или замени на цикл."
         ),
         "code": (
-            '<pre language="javascript">// ❌ ПЛОХО — нет базового случая\n'
+            '<pre><code class="language-javascript">// ❌ ПЛОХО — нет базового случая\n'
             "function infinite() {\n"
             "  return infinite(); // Stack Overflow!\n"
             "}\n\n"
             "// ✅ ХОРОШО — есть базовый случай\n"
             "function countdown(n) {\n"
-            '  if (n <= 0) return "Старт!";  // Базовый случай\n'
+            '  if (n &lt;= 0) return "Старт!";  // Базовый случай\n'
             "  return countdown(n - 1);\n"
-            "}</pre>"
+            "}</code></pre>"
         ),
         "quiz": {
             "question": "Как называется ошибка при бесконечной рекурсии?",
@@ -504,11 +504,11 @@ TICKETS = [
             "• Список — поезд (вагоны цепляются друг за другом)"
         ),
         "code": (
-            '<pre language="javascript">// Массив в JS\n'
+            '<pre><code class="language-javascript">// Массив в JS\n'
             'let arr = [1, 2, 3, 4, 5];\n'
             'console.log(arr[2]); // 3 — мгновенный доступ O(1)\n\n'
             '// Вставка в середину — медленно O(n)\n'
-            'arr.splice(2, 0, 99); // [1, 2, 99, 3, 4, 5]</pre>'
+            'arr.splice(2, 0, 99); // [1, 2, 99, 3, 4, 5]</code></pre>'
         ),
         "quiz": {
             "question": "Какая структура данных обеспечивает мгновенный доступ по индексу?",
@@ -562,7 +562,7 @@ TICKETS = [
             "• Нужен поиск по ключу → словарь"
         ),
         "code": (
-            '<pre language="javascript">// Массив\n'
+            '<pre><code class="language-javascript">// Массив\n'
             "let arr = [1, 2, 3];\n\n"
             "// Стек (на базе массива)\n"
             "let stack = [];\n"
@@ -573,7 +573,7 @@ TICKETS = [
             'queue.push("A"); queue.push("B");\n'
             'queue.shift(); // "A" (первый)\n\n'
             "// Словарь\n"
-            'let dict = { name: "Толик", age: 18 };</pre>'
+            'let dict = { name: "Толик", age: 18 };</code></pre>'
         ),
         "quiz": {
             "question": "Какая структура данных работает по принципу FIFO?",
@@ -599,7 +599,7 @@ TICKETS = [
             "📌 <b>Связка:</b> Call Stack (билет 15, 38) — стек вызовов функций."
         ),
         "code": (
-            '<pre language="javascript">// Стек — LIFO\n'
+            '<pre><code class="language-javascript">// Стек — LIFO\n'
             "let stack = [];\n"
             "stack.push(1); // [1]\n"
             "stack.push(2); // [1, 2]\n"
@@ -610,7 +610,7 @@ TICKETS = [
             "queue.push(1); // [1]\n"
             "queue.push(2); // [1, 2]\n"
             "queue.push(3); // [1, 2, 3]\n"
-            "queue.shift(); // 1 ← первый</pre>"
+            "queue.shift(); // 1 ← первый</code></pre>"
         ),
         "quiz": {
             "question": "Что означает LIFO?",
@@ -639,7 +639,7 @@ TICKETS = [
             "⚡ <b>Скорость:</b> Поиск по ключу — <code>O(1)</code> в среднем!"
         ),
         "code": (
-            '<pre language="javascript">// Object\n'
+            '<pre><code class="language-javascript">// Object\n'
             "let user = {\n"
             '  name: "Толик",   // ключ: name, значение: "Толик"\n'
             "  age: 18,\n"
@@ -649,7 +649,7 @@ TICKETS = [
             "// Map\n"
             "let map = new Map();\n"
             'map.set("key", "value");\n'
-            'map.get("key"); // "value"</pre>'
+            'map.get("key"); // "value"</code></pre>'
         ),
         "quiz": {
             "question": "Какая средняя сложность поиска по ключу в ассоциативном массиве?",
@@ -699,16 +699,16 @@ TICKETS = [
             "(билет 23) работает <b>намного быстрее</b>."
         ),
         "code": (
-            '<pre language="javascript">// O(n) — линейный перебор\n'
+            '<pre><code class="language-javascript">// O(n) — линейный перебор\n'
             "function findMax(arr) {\n"
             "  let max = arr[0];\n"
-            "  for (let i = 1; i < arr.length; i++) { // n шагов\n"
-            "    if (arr[i] > max) max = arr[i];\n"
+            "  for (let i = 1; i &lt; arr.length; i++) { // n шагов\n"
+            "    if (arr[i] &gt; max) max = arr[i];\n"
             "  }\n"
             "  return max;\n"
             "}\n"
             "// 10 элементов → 10 шагов\n"
-            "// 1000 элементов → 1000 шагов</pre>"
+            "// 1000 элементов → 1000 шагов</code></pre>"
         ),
         "quiz": {
             "question": "Сколько шагов потребуется алгоритму O(n) для массива из 1000 элементов?",
@@ -733,18 +733,18 @@ TICKETS = [
             "⚠️ <b>Важно:</b> Бинарный работает <b>только с отсортированными</b> данными!"
         ),
         "code": (
-            '<pre language="javascript">// Бинарный поиск\n'
+            '<pre><code class="language-javascript">// Бинарный поиск\n'
             "function binarySearch(arr, target) {\n"
             "  let left = 0, right = arr.length - 1;\n"
-            "  while (left <= right) {\n"
+            "  while (left &lt;= right) {\n"
             "    let mid = Math.floor((left + right) / 2);\n"
             "    if (arr[mid] === target) return mid;\n"
-            "    if (arr[mid] < target) left = mid + 1;\n"
+            "    if (arr[mid] &lt; target) left = mid + 1;\n"
             "    else right = mid - 1;\n"
             "  }\n"
             "  return -1;\n"
             "}\n"
-            "// 1000 элементов → ~10 шагов (а не 1000!)</pre>"
+            "// 1000 элементов → ~10 шагов (а не 1000!)</code></pre>"
         ),
         "quiz": {
             "question": "Какое обязательное условие для бинарного поиска?",
@@ -774,7 +774,7 @@ TICKETS = [
             "(билет 26 — чистые функции)."
         ),
         "code": (
-            '<pre language="javascript">// Мутабельный — объект можно менять\n'
+            '<pre><code class="language-javascript">// Мутабельный — объект можно менять\n'
             'let user = { name: "Толик" };\n'
             'user.name = "Борис"; // Изменили! ✅\n\n'
             "// Иммутабельный — строка не меняется\n"
@@ -782,7 +782,7 @@ TICKETS = [
             'str[0] = "H"; // Не работает! ❌\n'
             'console.log(str); // "hello"\n\n'
             '// Создаём новую строку\n'
-            'let newStr = "H" + str.slice(1); // "Hello"</pre>'
+            'let newStr = "H" + str.slice(1); // "Hello"</code></pre>'
         ),
         "quiz": {
             "question": "Какой тип данных в JavaScript является иммутабельным?",
@@ -809,7 +809,7 @@ TICKETS = [
             "функция <b>БЕЗ</b> побочных эффектов."
         ),
         "code": (
-            '<pre language="javascript">let total = 0; // Глобальная переменная\n\n'
+            '<pre><code class="language-javascript">let total = 0; // Глобальная переменная\n\n'
             "// ❌ С побочным эффектом\n"
             "function addToTotal(x) {\n"
             "  total += x; // Меняет внешнюю переменную!\n"
@@ -817,7 +817,7 @@ TICKETS = [
             "// ✅ Без побочного эффекта\n"
             "function add(a, b) {\n"
             "  return a + b; // Просто возвращает результат\n"
-            "}</pre>"
+            "}</code></pre>"
         ),
         "quiz": {
             "question": "Что из этого является побочным эффектом?",
@@ -847,7 +847,7 @@ TICKETS = [
             "Связь с билетами 24 (иммутабельность) и 25 (побочные эффекты)."
         ),
         "code": (
-            '<pre language="javascript">// ✅ Чистая функция\n'
+            '<pre><code class="language-javascript">// ✅ Чистая функция\n'
             "function add(a, b) {\n"
             "  return a + b;\n"
             "}\n"
@@ -858,7 +858,7 @@ TICKETS = [
             "function increment() {\n"
             "  count++;       // Побочный эффект!\n"
             "  return count;  // Результат зависит от внешней переменной\n"
-            "}</pre>"
+            "}</code></pre>"
         ),
         "quiz": {
             "question": "Какое свойство НЕ относится к чистой функции?",
@@ -891,7 +891,7 @@ TICKETS = [
             "Объект = конкретный дом, построенный по чертежу."
         ),
         "code": (
-            '<pre language="javascript">class Car {\n'
+            '<pre><code class="language-javascript">class Car {\n'
             "  constructor(brand, speed) {\n"
             "    this.brand = brand;  // Свойство\n"
             "    this.speed = speed;\n"
@@ -901,7 +901,7 @@ TICKETS = [
             "  }\n"
             "}\n\n"
             'let myCar = new Car("BMW", 200); // Объект\n'
-            'myCar.drive(); // "BMW едет 200 км/ч"</pre>'
+            'myCar.drive(); // "BMW едет 200 км/ч"</code></pre>'
         ),
         "quiz": {
             "question": "Как называется «чертёж» для создания объектов в ООП?",
@@ -951,10 +951,10 @@ TICKETS = [
             "но не лезешь в микросхемы (реализация)."
         ),
         "code": (
-            '<pre language="javascript">class BankAccount {\n'
+            '<pre><code class="language-javascript">class BankAccount {\n'
             "  #balance = 0; // Приватное поле!\n\n"
             "  deposit(amount) {\n"
-            "    if (amount > 0) this.#balance += amount;\n"
+            "    if (amount &gt; 0) this.#balance += amount;\n"
             "  }\n\n"
             "  getBalance() {\n"
             "    return this.#balance; // Доступ через метод\n"
@@ -963,7 +963,7 @@ TICKETS = [
             "let acc = new BankAccount();\n"
             "acc.deposit(100);\n"
             "// acc.#balance; // ❌ Ошибка — приватное!\n"
-            "acc.getBalance(); // ✅ 100</pre>"
+            "acc.getBalance(); // ✅ 100</code></pre>"
         ),
         "quiz": {
             "question": "Какой символ используется для приватных полей в JavaScript (ES2022)?",
@@ -988,7 +988,7 @@ TICKETS = [
             "📌 <b>Связка:</b> Полиморфизм + наследование (билет 28) = мощная комбинация."
         ),
         "code": (
-            '<pre language="javascript">class Shape {\n'
+            '<pre><code class="language-javascript">class Shape {\n'
             "  draw() {\n"
             '    console.log("Рисую фигуру");\n'
             "  }\n"
@@ -1005,7 +1005,7 @@ TICKETS = [
             "}\n\n"
             "// Один интерфейс — разное поведение\n"
             "let shapes = [new Circle(), new Square()];\n"
-            "shapes.forEach(s => s.draw());</pre>"
+            "shapes.forEach(s =&gt; s.draw());</code></pre>"
         ),
         "quiz": {
             "question": "Что такое полиморфизм?",
@@ -1036,7 +1036,7 @@ TICKETS = [
             "• Работает и в браузере, и на сервере (Node.js)"
         ),
         "code": (
-            '<pre language="javascript">// Процедурный стиль\n'
+            '<pre><code class="language-javascript">// Процедурный стиль\n'
             'let name = "Толик";\n'
             "console.log(name);\n\n"
             "// ООП\n"
@@ -1045,8 +1045,8 @@ TICKETS = [
             '  greet() { return `Привет, ${this.name}`; }\n'
             "}\n\n"
             "// Функциональный\n"
-            "const double = x => x * 2;\n"
-            "[1, 2, 3].map(double); // [2, 4, 6]</pre>"
+            "const double = x =&gt; x * 2;\n"
+            "[1, 2, 3].map(double); // [2, 4, 6]</code></pre>"
         ),
         "quiz": {
             "question": "Какой стиль программирования НЕ поддерживает JavaScript?",
@@ -1080,13 +1080,13 @@ TICKETS = [
             "📌 <b>Связка с билетами 6 и 33:</b> var + hoisting = ловушка!"
         ),
         "code": (
-            '<pre language="javascript">var a = 1;   // Функциональная область\n'
+            '<pre><code class="language-javascript">var a = 1;   // Функциональная область\n'
             "let b = 2;   // Блочная область\n"
             "const c = 3; // Блочная, нельзя менять\n\n"
             "// const + объект — хитрость!\n"
             'const user = { name: "Толик" };\n'
             'user.name = "Борис"; // ✅ Можно! Объект мутабельный\n'
-            "// user = {};         // ❌ Нельзя! Переприсвоить нельзя</pre>"
+            "// user = {};         // ❌ Нельзя! Переприсвоить нельзя</code></pre>"
         ),
         "quiz": {
             "question": "Можно ли изменить свойство объекта, объявленного через const?",
@@ -1116,7 +1116,7 @@ TICKETS = [
             "(объявления), а потом начинает урок (выполнение)."
         ),
         "code": (
-            '<pre language="javascript">// var — hoisting\n'
+            '<pre><code class="language-javascript">// var — hoisting\n'
             'console.log(a); // undefined (не ошибка!)\n'
             "var a = 5;\n\n"
             "// let — Temporal Dead Zone\n"
@@ -1126,7 +1126,7 @@ TICKETS = [
             'sayHi(); // ✅ "Привет!"\n'
             "function sayHi() {\n"
             '  console.log("Привет!");\n'
-            "}</pre>"
+            "}</code></pre>"
         ),
         "quiz": {
             "question": "Что выведет console.log(x) перед строкой var x = 5?",
@@ -1151,7 +1151,7 @@ TICKETS = [
             "📌 <b>Связка:</b> Замыкание = альтернатива инкапсуляции (билет 29)."
         ),
         "code": (
-            '<pre language="javascript">function createCounter() {\n'
+            '<pre><code class="language-javascript">function createCounter() {\n'
             '  let count = 0; // "Заперта" внутри\n\n'
             "  return function() {\n"
             "    count++;\n"
@@ -1162,7 +1162,7 @@ TICKETS = [
             "console.log(counter()); // 1\n"
             "console.log(counter()); // 2\n"
             "console.log(counter()); // 3\n"
-            "// count недоступна снаружи!</pre>"
+            "// count недоступна снаружи!</code></pre>"
         ),
         "quiz": {
             "question": "Что такое замыкание?",
@@ -1192,7 +1192,7 @@ TICKETS = [
             "📌 <b>Связка с билетом 36:</b> Стрелочные функции НЕ имеют своего this!"
         ),
         "code": (
-            '<pre language="javascript">const user = {\n'
+            '<pre><code class="language-javascript">const user = {\n'
             '  name: "Толик",\n'
             "  greet() {\n"
             "    console.log(this.name); // this = user\n"
@@ -1201,7 +1201,7 @@ TICKETS = [
             'user.greet(); // "Толик" ✅\n\n'
             "// Потеря this\n"
             "const fn = user.greet;\n"
-            "fn(); // undefined ❌ (this = window)</pre>"
+            "fn(); // undefined ❌ (this = window)</code></pre>"
         ),
         "quiz": {
             "question": "Чему равен this в методе объекта?",
@@ -1220,7 +1220,7 @@ TICKETS = [
         "title": "Стрелочная функция",
         "short": "Нет своего this (берёт у соседа) и короче.",
         "explanation": (
-            "🔹 <b>Стрелочная функция (=>)</b> — короткий синтаксис для функций.\n\n"
+            "🔹 <b>Стрелочная функция (=&gt;)</b> — короткий синтаксис для функций.\n\n"
             "📌 <b>Отличия от обычной:</b>\n"
             "• ❌ Нет своего <code>this</code> (берёт из внешнего контекста)\n"
             "• ❌ Нет <code>arguments</code>\n"
@@ -1232,21 +1232,21 @@ TICKETS = [
             "📌 <b>Связка с билетом 35:</b> Стрелочная функция решает проблему «потери this»."
         ),
         "code": (
-            '<pre language="javascript">// Обычная функция\n'
+            '<pre><code class="language-javascript">// Обычная функция\n'
             "function add(a, b) {\n"
             "  return a + b;\n"
             "}\n\n"
             "// Стрелочная — то же самое, но короче\n"
-            "const add2 = (a, b) => a + b;\n\n"
+            "const add2 = (a, b) =&gt; a + b;\n\n"
             "// Стрелочная + this\n"
             "const timer = {\n"
             "  seconds: 0,\n"
             "  start() {\n"
-            "    setInterval(() => {\n"
+            "    setInterval(() =&gt; {\n"
             "      this.seconds++; // ✅ this = timer\n"
             "    }, 1000);\n"
             "  }\n"
-            "};</pre>"
+            "};</code></pre>"
         ),
         "quiz": {
             "question": "Что НЕ имеет стрелочная функция?",
@@ -1278,7 +1278,7 @@ TICKETS = [
             "над прототипами."
         ),
         "code": (
-            '<pre language="javascript">const animal = {\n'
+            '<pre><code class="language-javascript">const animal = {\n'
             '  eats: true,\n'
             '  walk() { console.log("Иду"); }\n'
             "};\n\n"
@@ -1288,7 +1288,7 @@ TICKETS = [
             "};\n\n"
             "console.log(dog.barks); // true (своё)\n"
             "console.log(dog.eats);  // true (из прототипа!)\n"
-            'dog.walk(); // "Иду" (из прототипа!)</pre>'
+            'dog.walk(); // "Иду" (из прототипа!)</code></pre>'
         ),
         "quiz": {
             "question": "Где JS ищет свойство, если его нет в самом объекте?",
@@ -1319,16 +1319,16 @@ TICKETS = [
             "принимает заказы → отдаёт на кухню → когда готово, несёт клиенту."
         ),
         "code": (
-            '<pre language="javascript">console.log("1");  // ← Call Stack\n\n'
-            "setTimeout(() => {\n"
+            '<pre><code class="language-javascript">console.log("1");  // ← Call Stack\n\n'
+            "setTimeout(() =&gt; {\n"
             '  console.log("2"); // ← Callback Queue (через 0мс)\n'
             "}, 0);\n\n"
             'console.log("3");  // ← Call Stack\n\n'
             '// Вывод: "1", "3", "2"\n'
-            "// Даже с 0мс — setTimeout ждёт, пока стек освободится!</pre>"
+            "// Даже с 0мс — setTimeout ждёт, пока стек освободится!</code></pre>"
         ),
         "quiz": {
-            "question": 'Что выведется первым: console.log("A") или setTimeout(() => console.log("B"), 0)?',
+            "question": 'Что выведется первым: console.log("A") или setTimeout(() =&gt; console.log("B"), 0)?',
             "options": ['"B"', '"A"', "Одновременно", "Случайно"],
             "correct": 1,
         },
@@ -1350,11 +1350,11 @@ TICKETS = [
             "• async/await = заказал и «замер», пока не доставят"
         ),
         "code": (
-            '<pre language="javascript">// Promise — цепочки\n'
+            '<pre><code class="language-javascript">// Promise — цепочки\n'
             "fetch(url)\n"
-            "  .then(res => res.json())\n"
-            "  .then(data => console.log(data))\n"
-            '  .catch(err => console.error("Ошибка"));\n\n'
+            "  .then(res =&gt; res.json())\n"
+            "  .then(data =&gt; console.log(data))\n"
+            '  .catch(err =&gt; console.error("Ошибка"));\n\n'
             "// async/await — как обычный код\n"
             "async function getData() {\n"
             "  try {\n"
@@ -1364,7 +1364,7 @@ TICKETS = [
             "  } catch (err) {\n"
             '    console.error("Ошибка");\n'
             "  }\n"
-            "}</pre>"
+            "}</code></pre>"
         ),
         "quiz": {
             "question": "Какие состояния может иметь Promise?",
@@ -1395,16 +1395,16 @@ TICKETS = [
             "DOM — это «3D-модель», которую можно крутить и менять."
         ),
         "code": (
-            '<pre language="javascript">// Найти элемент\n'
+            '<pre><code class="language-javascript">// Найти элемент\n'
             'const btn = document.querySelector("#myBtn");\n\n'
             "// Изменить текст\n"
             'btn.textContent = "Нажми меня!";\n\n'
             "// Изменить стиль\n"
             'btn.style.backgroundColor = "blue";\n\n'
             "// Добавить обработчик\n"
-            'btn.addEventListener("click", () => {\n'
+            'btn.addEventListener("click", () =&gt; {\n'
             '  alert("Нажата!");\n'
-            "});</pre>"
+            "});</code></pre>"
         ),
         "quiz": {
             "question": "Что такое DOM?",

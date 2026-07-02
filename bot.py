@@ -4,6 +4,7 @@
 Режимы: просмотр, случайный билет, квиз, прогресс.
 """
 
+import html
 import json
 import logging
 import os
@@ -15,6 +16,7 @@ from telegram import (
     InlineKeyboardMarkup,
     Update,
 )
+from telegram.error import BadRequest
 from telegram.ext import (
     Application,
     CallbackQueryHandler,
@@ -150,12 +152,40 @@ def format_ticket(ticket: dict, show_full: bool = True) -> str:
         text += f"💡 {ticket['short']}\n"
     return text
 
+
+async def safe_edit(query, text: str, reply_markup=None, parse_mode="HTML"):
+    """Safely edit message text, handling common Telegram errors."""
+    try:
+        await query.edit_message_text(
+            text, reply_markup=reply_markup, parse_mode=parse_mode
+        )
+    except BadRequest as e:
+        error_msg = str(e).lower()
+        if "message is not modified" in error_msg:
+            # Same content — ignore
+            logger.debug("Message not modified, ignoring.")
+        elif "can't parse entities" in error_msg:
+            # HTML parse error — fallback to plain text (strip tags)
+            logger.warning("HTML parse error for message, falling back to plain text: %s", e)
+            import re
+            plain = re.sub(r'<[^>]+>', '', text)
+            try:
+                await query.edit_message_text(
+                    plain, reply_markup=reply_markup
+                )
+            except BadRequest:
+                logger.error("Failed to send even plain text fallback.")
+        else:
+            logger.error("BadRequest editing message: %s", e)
+            raise
+
 # ──────────────────── Handlers ────────────────────
 
 async def start(update: Update, context: ContextTypes.DEFAULT_TYPE):
     user = update.effective_user
+    name = html.escape(user.first_name)
     text = (
-        f"👋 Привет, <b>{user.first_name}</b>!\n\n"
+        f"👋 Привет, <b>{name}</b>!\n\n"
         f"🎓 Я бот для подготовки к экзамену по программированию.\n"
         f"У меня <b>40 билетов</b> по 3 блокам:\n\n"
         f"📐 Алгоритмы и логика (1–15)\n"
@@ -166,7 +196,7 @@ async def start(update: Update, context: ContextTypes.DEFAULT_TYPE):
     if update.message:
         await update.message.reply_text(text, reply_markup=main_menu_keyboard(), parse_mode="HTML")
     elif update.callback_query:
-        await update.callback_query.edit_message_text(text, reply_markup=main_menu_keyboard(), parse_mode="HTML")
+        await safe_edit(update.callback_query, text, reply_markup=main_menu_keyboard())
 
 
 async def button_handler(update: Update, context: ContextTypes.DEFAULT_TYPE):
@@ -185,7 +215,7 @@ async def button_handler(update: Update, context: ContextTypes.DEFAULT_TYPE):
         for key, block in BLOCKS.items():
             count = len(BLOCK_TICKET_IDS[key])
             text += f"{block['emoji']} {block['name']} — {count} билетов\n"
-        await query.edit_message_text(text, reply_markup=blocks_keyboard(), parse_mode="HTML")
+        await safe_edit(query, text, reply_markup=blocks_keyboard(), parse_mode="HTML")
 
     # ── Specific block ──
     elif data.startswith("block_"):
@@ -206,7 +236,7 @@ async def button_handler(update: Update, context: ContextTypes.DEFAULT_TYPE):
             mark = "✅" if tid in progress["learned"] else "📝"
             text += f"{mark} <b>#{tid}</b> — {t['title']}\n"
 
-        await query.edit_message_text(
+        await safe_edit(query, 
             text, reply_markup=ticket_list_keyboard(block_key), parse_mode="HTML"
         )
 
@@ -216,7 +246,7 @@ async def button_handler(update: Update, context: ContextTypes.DEFAULT_TYPE):
         ticket = get_ticket_by_id(ticket_id)
         if ticket:
             text = format_ticket(ticket)
-            await query.edit_message_text(
+            await safe_edit(query, 
                 text, reply_markup=ticket_action_keyboard(ticket_id), parse_mode="HTML"
             )
 
@@ -235,7 +265,7 @@ async def button_handler(update: Update, context: ContextTypes.DEFAULT_TYPE):
         # Refresh
         ticket = get_ticket_by_id(ticket_id)
         text = format_ticket(ticket)
-        await query.edit_message_text(
+        await safe_edit(query, 
             text, reply_markup=ticket_action_keyboard(ticket_id), parse_mode="HTML"
         )
 
@@ -243,7 +273,7 @@ async def button_handler(update: Update, context: ContextTypes.DEFAULT_TYPE):
     elif data == "menu_random":
         ticket = random.choice(TICKETS)
         text = "🎲 <b>Случайный билет!</b>\n\n" + format_ticket(ticket)
-        await query.edit_message_text(
+        await safe_edit(query, 
             text, reply_markup=ticket_action_keyboard(ticket["id"]), parse_mode="HTML"
         )
 
@@ -260,7 +290,7 @@ async def button_handler(update: Update, context: ContextTypes.DEFAULT_TYPE):
             f"🧠 <b>Квиз! Билет #{ticket['id']}: {ticket['title']}</b>\n\n"
             f"❓ {quiz['question']}\n"
         )
-        await query.edit_message_text(
+        await safe_edit(query, 
             text,
             reply_markup=quiz_options_keyboard(ticket["id"], quiz["options"]),
             parse_mode="HTML",
@@ -275,7 +305,7 @@ async def button_handler(update: Update, context: ContextTypes.DEFAULT_TYPE):
             f"🧠 <b>Квиз! Билет #{ticket['id']}: {ticket['title']}</b>\n\n"
             f"❓ {quiz['question']}\n"
         )
-        await query.edit_message_text(
+        await safe_edit(query, 
             text,
             reply_markup=quiz_options_keyboard(ticket["id"], quiz["options"]),
             parse_mode="HTML",
@@ -318,7 +348,7 @@ async def button_handler(update: Update, context: ContextTypes.DEFAULT_TYPE):
             [InlineKeyboardButton("🧠 Ещё вопрос!", callback_data="menu_quiz")],
             [InlineKeyboardButton("🔙 Главное меню", callback_data="menu_main")],
         ]
-        await query.edit_message_text(
+        await safe_edit(query, 
             text, reply_markup=InlineKeyboardMarkup(buttons), parse_mode="HTML"
         )
 
@@ -376,7 +406,7 @@ async def button_handler(update: Update, context: ContextTypes.DEFAULT_TYPE):
             [InlineKeyboardButton("🧠 Квиз", callback_data="menu_quiz")],
             [InlineKeyboardButton("🔙 Главное меню", callback_data="menu_main")],
         ]
-        await query.edit_message_text(
+        await safe_edit(query, 
             text, reply_markup=InlineKeyboardMarkup(buttons), parse_mode="HTML"
         )
 
@@ -411,7 +441,7 @@ async def button_handler(update: Update, context: ContextTypes.DEFAULT_TYPE):
                 [InlineKeyboardButton("⏭ Пропустить", callback_data=f"mskip_{ticket['id']}")],
                 [InlineKeyboardButton("🔙 Меню", callback_data="menu_main")],
             ]
-        await query.edit_message_text(
+        await safe_edit(query, 
             text, reply_markup=InlineKeyboardMarkup(buttons), parse_mode="HTML"
         )
 
@@ -445,7 +475,7 @@ async def button_handler(update: Update, context: ContextTypes.DEFAULT_TYPE):
                 [InlineKeyboardButton("⏭ Пропустить", callback_data=f"mskip_{ticket['id']}")],
                 [InlineKeyboardButton("🔙 Меню", callback_data="menu_main")],
             ]
-        await query.edit_message_text(
+        await safe_edit(query, 
             text, reply_markup=InlineKeyboardMarkup(buttons), parse_mode="HTML"
         )
 
@@ -467,7 +497,7 @@ async def button_handler(update: Update, context: ContextTypes.DEFAULT_TYPE):
         else:
             text = "🏆 <b>Марафон завершён!</b>"
             buttons = [[InlineKeyboardButton("🔙 Меню", callback_data="menu_main")]]
-            await query.edit_message_text(
+            await safe_edit(query, 
                 text, reply_markup=InlineKeyboardMarkup(buttons), parse_mode="HTML"
             )
             return
@@ -482,7 +512,7 @@ async def button_handler(update: Update, context: ContextTypes.DEFAULT_TYPE):
             [InlineKeyboardButton("⏭ Пропустить", callback_data=f"mskip_{ticket['id']}")],
             [InlineKeyboardButton("🔙 Меню", callback_data="menu_main")],
         ]
-        await query.edit_message_text(
+        await safe_edit(query, 
             text, reply_markup=InlineKeyboardMarkup(buttons), parse_mode="HTML"
         )
 
@@ -496,7 +526,7 @@ async def button_handler(update: Update, context: ContextTypes.DEFAULT_TYPE):
             [InlineKeyboardButton("✅ Да, сбросить", callback_data="reset_confirm")],
             [InlineKeyboardButton("❌ Отмена", callback_data="menu_main")],
         ]
-        await query.edit_message_text(
+        await safe_edit(query, 
             text, reply_markup=InlineKeyboardMarkup(buttons), parse_mode="HTML"
         )
 
